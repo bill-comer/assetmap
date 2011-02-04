@@ -19,5 +19,10 @@ class PostcodeTests extends GrailsUnitTestCase {
       assertEquals "BL7 0NG", "" + pc.toString()
     }
     
+    void testAValidEntwistlePCLowerCase(){
+      Postcode pc = new Postcode(outward:"bl7", inward:"0ng")
+      assertEquals "BL7 0NG", "" + pc.toString()
+    }
+    
   }
 
