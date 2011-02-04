@@ -10,4 +10,8 @@ class Postcode
     inward(blank: false, maxSize:3)
   }
   
+  String toString(){
+    return outward + " " + inward
+  }
+  
 }
