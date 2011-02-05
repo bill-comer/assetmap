@@ -9,7 +9,7 @@ class Asset {
   AssetGroup assetGroup
   
     static constraints = {
-      name(blank: false, maxSize:100)
+      name(blank: false, size:5..100)
       postcode(maxSize:6)
       description(maxSize:1000)
     }

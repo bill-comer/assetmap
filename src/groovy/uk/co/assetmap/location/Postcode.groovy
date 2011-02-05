@@ -1,9 +1,12 @@
 package uk.co.assetmap.location
 
+import org.codehaus.groovy.grails.validation.Validateable
+
+@Validateable
 class Postcode
 {
-  String outward
-  String inward
+  String outward  // first part
+  String inward   // second part
   
   void setOutward(String s){
     outward = s?.toUpperCase()
