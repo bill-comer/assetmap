@@ -16,29 +16,31 @@ class PostcodeTests extends GrailsUnitTestCase {
 
     void testAValidEntwistlePC(){
       Postcode pc = new Postcode(outward:"BL7", inward:"0NG")
+      assertTrue(pc.validate())
       assertEquals "BL7 0NG", "" + pc.toString()
     }
     
     void testAValidEntwistlePCLowerCase(){
       Postcode pc = new Postcode(outward:"bl7", inward:"0ng")
+      assertTrue(pc.validate())
       assertEquals "BL7 0NG", "" + pc.toString()
     }
     
     void testAnInValidEntwistle_outwardTooLong(){
       Postcode pc = new Postcode(outward:"fsdfsfsfs", inward:"0ng")
-      try {
-        pc.validate()
-        fail("should have thrown validation Exception outward too long")
-      } catch (Exception e){}
+      assertFalse(pc.validate())
+    }
+    
+    
+    void testAnInValidEntwistle_outwardTooShort(){
+      Postcode pc = new Postcode(outward:"b", inward:"0ng")
+      assertFalse(pc.validate())
     }
     
     
     void testAnInValidEntwistle_inwardTooLong(){
       Postcode pc = new Postcode(outward:"bl7", inward:"0ngasdasda")
-      try {
-        pc.validate()
-        fail("should have thrown validation Exception inward too long")
-      } catch (Exception e){}
+      assertFalse(pc.validate())
     }
     
   }

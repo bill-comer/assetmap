@@ -13,24 +13,15 @@ class AssetTests extends GrailsUnitTestCase {
 
     void testNameOK() {
       Asset asset = new Asset(name:"anOkName")
+      assertTrue(asset.validate())
     }
     
     void testNameBlank() {
       Asset asset = new Asset()
-      try {
-        asset.validate()
-        fail("should have thrown validation Exception")
-      }
-      catch (Exception e){
-      }
+        assertFalse(asset.validate())
     }
     void testNameTooShort() {
       Asset asset = new Asset(name:"fail")
-      try {
-        asset.validate()
-        fail("should have thrown validation Exception name too short")
-      }
-      catch (Exception e){
-      }
+        assertFalse(asset.validate())
     }
 }
