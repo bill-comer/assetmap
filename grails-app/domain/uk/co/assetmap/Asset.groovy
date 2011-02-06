@@ -10,7 +10,7 @@ class Asset {
   
     static constraints = {
       name(blank: false, size:5..100)
-      postcode(maxSize:6)
-      description(maxSize:1000)
+      postcode( maxSize:6, nullable:true)
+      description(maxSize:1000, nullable:true)
     }
 }
