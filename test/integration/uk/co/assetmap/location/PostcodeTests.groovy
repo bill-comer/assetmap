@@ -16,6 +16,11 @@ class PostcodeTests extends GrailsUnitTestCase {
 
     void testAValidEntwistlePC(){
       Postcode pc = new Postcode(outward:"BL7", inward:"0NG")
+      if(!pc.validate()) {
+        pc.errors.each {
+              println "oops-" + it
+        }
+    }
       assertTrue(pc.validate())
       assertEquals "BL7 0NG", "" + pc.toString()
     }
@@ -35,6 +40,18 @@ class PostcodeTests extends GrailsUnitTestCase {
     void testAnInValidEntwistle_outwardTooShort(){
       Postcode pc = new Postcode(outward:"b", inward:"0ng")
       assertFalse(pc.validate())
+    }
+    
+    
+    void testOutwardFirstCharIsLetter(){
+      Postcode pc = new Postcode(outward:"bl7", inward:"0ng")
+      assertTrue(pc.validate())
+    }
+    
+    void testOutwardFirstCharIsNotLetter(){
+      Postcode pc = new Postcode(outward:"7l7", inward:"0ng")
+      assertFalse(pc.validate())
+      assertTrue(pc.errors.hasFieldErrors("outward"))
     }
     
     

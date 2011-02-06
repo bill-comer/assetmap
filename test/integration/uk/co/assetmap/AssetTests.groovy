@@ -13,25 +13,24 @@ class AssetTests extends GrailsUnitTestCase {
 
     void testNameOK() {
       AssetGroup assetGroup = new AssetGroup(name:"testGroup");
-      
       Asset asset = new Asset(name:"anOkName", assetGroup:assetGroup)
-      //asset.assetGroup = assetGroup
-      
-      if(!asset.validate()) {
-        asset.errors.allErrors.each {
-          println it
-          }
-        }
+            
       assertTrue(asset.validate())
     }
     
     void testNameBlank() {
-      Asset asset = new Asset()
+      AssetGroup assetGroup = new AssetGroup(name:"testGroup");
+      Asset asset = new Asset(assetGroup:assetGroup)
+      
       assertFalse(asset.validate())
+      assertTrue(asset.errors.hasFieldErrors("name"))
     }
     
     void testNameTooShort() {
-      Asset asset = new Asset(name:"fail")
-        assertFalse(asset.validate())
+      AssetGroup assetGroup = new AssetGroup(name:"testGroup");
+      Asset asset = new Asset(name:"fail", assetGroup:assetGroup)
+        
+      assertFalse(asset.validate())
+      assertTrue(asset.errors.hasFieldErrors("name"))
     }
 }
