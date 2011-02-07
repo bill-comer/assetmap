@@ -46,10 +46,7 @@ class PostcodeOutwardConstraint extends AbstractConstraint {
     if (value == null || value.length() < 2 || value.length() > 4) {
      return false
     }
-
-    println(NAME + ":ok for value[" + value + "]")
     return true
-      
   }
   
   /**
@@ -58,16 +55,23 @@ class PostcodeOutwardConstraint extends AbstractConstraint {
    * @return
    */
   boolean isFirstCharValid(String value) {
-    
-    if (!checkRegex("[A-Z]", value[0]))
+    return isAChar(value[0])
+  }
+
+	private boolean isAChar(String value) {
+		if (checkRegex("[A-Z]", value))
+		{
+			return true
+		}
+	}
+  
+  
+  boolean checkTwoCharOutward(String value) {
+    if (value.length() == 2)
     {
-      println("NOT a char")
-      return false
+      //if length is 2 then second char MUST be a number
+      return value[1].isNumber()
     }
-    
-    println(NAME + ":ok for value[" + value + "]")
-    return true
-      
   }
   
   private boolean checkRegex(String regex, String input) {
