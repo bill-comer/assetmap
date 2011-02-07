@@ -5,20 +5,13 @@ import java.util.regex.Pattern
 import org.codehaus.groovy.grails.validation.AbstractConstraint
 import org.springframework.validation.Errors
 
-class PostcodeOutwardConstraint extends AbstractConstraint {
+class PostcodeOutwardConstraint extends PostcodeAbstractConstraint {
 
   static final String DEFAULT_MESSAGE_CODE_LENGTH_INVALID = "default.outward.violation.length.invalid.message"
   static final String DEFAULT_MESSAGE_CODE_FIRST_CHAR = "default.outward.violation.first.char.message"
   static final String DEFAULT_MESSAGE_CODE_2ND_CHAR = "default.outward.violation.second.char.message"
   static final String DEFAULT_MESSAGE_CODE_OTHER_CHARS = "default.outward.violation.other.chars.message"
   static final String NAME = "pc_outward"
-  
-  private boolean validateConstraint
-  
-  public void rejectValueWithDefaultMessage(Object target, Errors errors, String defaultMessage, String[] codes, Object[] args) {
-      super.rejectValueWithDefaultMessage(target, errors, defaultMessage, codes, args)
-      
-  }
   
   protected void processValidate(Object target, Object propertyValue, Errors errors) {
     if (validateConstraint && propertyValue) {
@@ -48,16 +41,6 @@ class PostcodeOutwardConstraint extends AbstractConstraint {
     }
   }
 
-  void setParameter(Object constraintParameter) {
-    if (!(constraintParameter instanceof Boolean)) {
-      throw new IllegalArgumentException("Parameter for constraint [$NAME] of property [$constraintPropertyName] of class [$constraintOwningClass] must be a boolean value")
-    }
-    validateConstraint = constraintParameter
-    super.setParameter(constraintParameter)
-  }
-
-  boolean supports(Class type) { true }
-
   String getName() { NAME }
 
   boolean isLengthValid(String value) {
@@ -76,13 +59,6 @@ class PostcodeOutwardConstraint extends AbstractConstraint {
     return isAChar(value[0])
   }
 
-	private boolean isAChar(String value) {
-		if (checkRegex("[A-Z]", value))
-		{
-			return true
-		}
-	}
-  
   boolean checkOtherStringOptions(String value) {
     if (value.length() == 3) {
       if (isAChar(value[1])) {
@@ -119,10 +95,5 @@ class PostcodeOutwardConstraint extends AbstractConstraint {
       return true
     }
   }
-  
-  private boolean checkRegex(String regex, String input) {
-    Pattern pattern = Pattern.compile(regex);
-    return (pattern.matcher(input).matches());
-   }
   
 }
