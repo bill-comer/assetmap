@@ -45,6 +45,11 @@ class PostcodeTests extends GrailsUnitTestCase {
     
     void testOutwardFirstCharIsLetter(){
       Postcode pc = new Postcode(outward:"bl7", inward:"0ng")
+      if(!pc.validate()) {
+        pc.errors.each {
+              println "oops-" + it
+        }
+    }
       assertTrue(pc.validate())
     }
     
