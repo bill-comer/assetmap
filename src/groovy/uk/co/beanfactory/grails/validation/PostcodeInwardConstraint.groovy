@@ -19,6 +19,18 @@ class PostcodeInwardConstraint extends PostcodeAbstractConstraint {
         def args = [constraintPropertyName, constraintOwningClass, propertyValue] as Object[]
         rejectValue(target, errors, DEFAULT_MESSAGE_CODE_LENGTH_INVALID, "${NAME}.violation", args)
         }
+      
+      if(!isFirstCharANumber(propertyValue)) {
+        println("oops-" + DEFAULT_MESSAGE_CODE_LENGTH_INVALID)
+        def args = [constraintPropertyName, constraintOwningClass, propertyValue] as Object[]
+        rejectValue(target, errors, DEFAULT_MESSAGE_CODE_LENGTH_INVALID, "${NAME}.violation", args)
+        }
+      
+      if(!isSecondThirdLetters(propertyValue)) {
+        println("oops-" + DEFAULT_MESSAGE_CODE_LENGTH_INVALID)
+        def args = [constraintPropertyName, constraintOwningClass, propertyValue] as Object[]
+        rejectValue(target, errors, DEFAULT_MESSAGE_CODE_LENGTH_INVALID, "${NAME}.violation", args)
+        }
       }
   }
 
@@ -26,6 +38,21 @@ class PostcodeInwardConstraint extends PostcodeAbstractConstraint {
   
   boolean isLengthThreeChars(String value) {
     if (value == null || value.length() != 3) {
+      return false
+    }
+    return true
+  }
+  
+  boolean isFirstCharANumber(String value) {
+    return value[0].isNumber()
+  }
+  
+  
+  boolean isSecondThirdLetters(String value) {
+    if (!isAChar(value[1])) {
+      return false
+    }
+    if (!isAChar(value[2])) {
       return false
     }
     return true
