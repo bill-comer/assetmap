@@ -88,9 +88,24 @@ class PostcodeOutwardConstraint extends AbstractConstraint {
       if (isAChar(value[1])) {
         //second char is a char
         // third MUST be a number
-        return value[2].isNumber();
+        return value[2].isNumber()
+      } else {
+        // second char is a number
+        //third can be either
+        return true
       }
     } else {
+      if (value.length() == 4) {
+        //length must be 4
+        //second character MUST be a char
+        if (!isAChar(value[1])) {
+          return false
+        }
+        // third MUST be a number
+        if (!value[2].isNumber()) {
+          return false
+        }
+      }
       return true
     }
   }

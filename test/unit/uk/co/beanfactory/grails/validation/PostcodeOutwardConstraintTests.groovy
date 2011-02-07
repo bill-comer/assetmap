@@ -91,4 +91,14 @@ class PostcodeOutwardConstraintTests extends GrailsUnitTestCase {
       assertFalse(sut.checkOtherStringOptions("AAA"));  // second char is a char so third MUST be a number
       assertTrue(sut.checkOtherStringOptions("AA1"));  // second char is a char so third MUST be a number
     }
+    
+    void testFourChars_SecondIsAChar() {
+      PostcodeOutwardConstraint sut = new PostcodeOutwardConstraint()
+      assertFalse(sut.checkOtherStringOptions("A11a"));  // second MUST be a char
+      assertFalse(sut.checkOtherStringOptions("AAA1"));  // third MUST be a number
+      assertTrue(sut.checkOtherStringOptions("AA1A"));  // fourth can be char or number
+      assertTrue(sut.checkOtherStringOptions("AA11"));  // fourth can be char or number
+    }
+    
+    
 }
