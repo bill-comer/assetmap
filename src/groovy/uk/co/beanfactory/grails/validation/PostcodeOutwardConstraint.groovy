@@ -1,5 +1,7 @@
 package uk.co.beanfactory.grails.validation
 
+import java.util.regex.Pattern
+
 import org.codehaus.groovy.grails.validation.AbstractConstraint
 import org.springframework.validation.Errors
 
@@ -21,6 +23,10 @@ class PostcodeOutwardConstraint extends AbstractConstraint {
         def args = [constraintPropertyName, constraintOwningClass, propertyValue] as Object[]
         rejectValue(target, errors, DEFAULT_MESSAGE_CODE, "${NAME}.violation", args)
       }
+      if (!isFirstCharValid(propertyValue)) {
+        def args = [constraintPropertyName, constraintOwningClass, propertyValue] as Object[]
+        rejectValue(target, errors, DEFAULT_MESSAGE_CODE, "${NAME}.violation", args)
+      }
     }
   }
 
@@ -36,14 +42,37 @@ class PostcodeOutwardConstraint extends AbstractConstraint {
 
   String getName() { NAME }
 
-  private boolean isLengthValid(String value) {
+  boolean isLengthValid(String value) {
     if (value == null || value.length() < 2 || value.length() > 4) {
-      println("ooooops value[" + value + "]")
      return false
     }
+
     println(NAME + ":ok for value[" + value + "]")
     return true
       
   }
+  
+  /**
+   * is only passed upper case due to Postcode setter
+   * @param value
+   * @return
+   */
+  boolean isFirstCharValid(String value) {
+    
+    if (!checkRegex("[A-Z]", value[0]))
+    {
+      println("NOT a char")
+      return false
+    }
+    
+    println(NAME + ":ok for value[" + value + "]")
+    return true
+      
+  }
+  
+  private boolean checkRegex(String regex, String input) {
+    Pattern pattern = Pattern.compile(regex);
+    return (pattern.matcher(input).matches());
+   }
   
 }

@@ -16,7 +16,7 @@ class Postcode
   }
   
   static constraints = {
-    outward(blank: false, size:2..4, pc_outward:true)
+    outward(pc_outward:true)
     inward(blank: false, maxSize:3)
   }
   
