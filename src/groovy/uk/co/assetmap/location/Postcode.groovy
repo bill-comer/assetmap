@@ -17,7 +17,7 @@ class Postcode
   
   static constraints = {
     outward(pc_outward:true)
-    inward(blank: false, maxSize:3)
+    inward(pc_inward:true)
   }
   
   String toString(){

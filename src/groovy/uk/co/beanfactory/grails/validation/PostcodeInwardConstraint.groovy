@@ -14,7 +14,7 @@ class PostcodeInwardConstraint extends PostcodeAbstractConstraint {
   
   protected void processValidate(Object target, Object propertyValue, Errors errors) {
     if (validateConstraint && propertyValue) {
-      if (isLengthThreeChars(propertyValue)) {
+      if (!isLengthThreeChars(propertyValue)) {
         println("oops-" + DEFAULT_MESSAGE_CODE_LENGTH_INVALID)
         def args = [constraintPropertyName, constraintOwningClass, propertyValue] as Object[]
         rejectValue(target, errors, DEFAULT_MESSAGE_CODE_LENGTH_INVALID, "${NAME}.violation", args)
