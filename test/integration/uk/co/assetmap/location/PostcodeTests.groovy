@@ -59,10 +59,15 @@ class PostcodeTests extends GrailsUnitTestCase {
       assertTrue(pc.errors.hasFieldErrors("outward"))
     }
     
-    
     void testAnInValidEntwistle_inwardTooLong(){
       Postcode pc = new Postcode(outward:"bl7", inward:"0ngasdasda")
       assertFalse("inward should have failed as more than three chars", pc.validate())
+    }
+    
+    
+    void testAnInValidEntwistle_inwardInvalidFormat(){
+      Postcode pc = new Postcode(outward:"bl7", inward:"0n5")
+      assertFalse("inward should have failed as invalid last digit", pc.validate())
     }
     
   }
