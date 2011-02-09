@@ -66,6 +66,9 @@ class PostcodeType implements UserType
     original
   }
 
+  /**
+   * Gets a Postcode from a resultSet
+   */
   def Object nullSafeGet(ResultSet resultSet, String[] names, Object owner) throws HibernateException, SQLException
   {
     if (resultSet == null) {
@@ -80,6 +83,9 @@ class PostcodeType implements UserType
     return postcode
   }
 
+  /**
+   * adds a Postcode to a PreparedStatement
+   */
   void nullSafeSet(PreparedStatement statement, Object value, int index)
   {
     if (value == null)
