@@ -16,5 +16,6 @@
 			<attribute name="com.springsource.sts.grails.core.SOURCE_FOLDER" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="lib/mockrunner.jar" sourcepath="C:/projects/grails_work/assetMap2/source/mockrunner.zip"/>
 	<classpathentry kind="output" path="web-app/WEB-INF/classes"/>
 </classpath>
