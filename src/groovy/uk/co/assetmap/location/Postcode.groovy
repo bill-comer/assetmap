@@ -2,6 +2,8 @@ package uk.co.assetmap.location
 
 import org.codehaus.groovy.grails.validation.Validateable
 
+import uk.co.beanfactory.grails.database.type.PostcodeType;
+
 @Validateable
 class Postcode
 {
