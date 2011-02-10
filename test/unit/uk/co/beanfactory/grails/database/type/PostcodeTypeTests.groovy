@@ -2,15 +2,16 @@ package uk.co.beanfactory.grails.database.type;
 
 import static org.junit.Assert.*
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.util.ArrayList;
+import java.util.ArrayList
 
 import uk.co.assetmap.location.Postcode
 
+import com.mockrunner.jdbc.BasicJDBCTestCaseAdapter
+import com.mockrunner.mock.jdbc.MockConnection
+import com.mockrunner.mock.jdbc.MockPreparedStatement
 import com.mockrunner.mock.jdbc.MockResultSet
 
-class PostcodeTypeTests
+class PostcodeTypeTests extends BasicJDBCTestCaseAdapter
 {
   void testNullSafeGet()
   {
@@ -18,7 +19,6 @@ class PostcodeTypeTests
 
     MockResultSet resultSet = new MockResultSet("testMock")
 
-    //resultSet.setResultSetType(Types.VARCHAR)
     String[] names = "postcode"
 
     ArrayList<String> mockResultData = new ArrayList<String>()
@@ -40,9 +40,14 @@ class PostcodeTypeTests
     PostcodeType postcodeType = new PostcodeType()
 
     Postcode postcode = new Postcode(outward:"BL7", inward:"0NG")
+    MockConnection mockConnection =
+            getJDBCMockObjectFactory().getMockConnection();
+    MockPreparedStatement mockPreparedStatement = new MockPreparedStatement(mockConnection, "")
 
     //test method
-    postcodeType.nullSafeSet (statement, value, 1)
+    postcodeType.nullSafeSet (mockPreparedStatement, postcode, 1)
+    
+    assertEquals("BL7 0NG", mockPreparedStatement.getParameter(1) )
 
   }
 }
