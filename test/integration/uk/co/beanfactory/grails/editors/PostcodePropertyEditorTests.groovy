@@ -49,4 +49,12 @@ class PostcodePropertyEditorTests extends GrailsUnitTestCase
     
     }
   }
+  
+  void testGetAsText() {
+    PostcodePropertyEditor editor = new PostcodePropertyEditor()
+    Postcode postcode = new Postcode(outward:"BL7", inward:"0NG")
+    editor.setValue postcode
+    
+    assertEquals("BL7 0NG", editor.getAsText())
+  }
 }
