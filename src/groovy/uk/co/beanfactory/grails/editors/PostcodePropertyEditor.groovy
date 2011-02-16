@@ -18,6 +18,10 @@ class PostcodePropertyEditor extends PropertyEditorSupport implements PropertyEd
   public void setAsText(String postcodeAsText)
   {
     String[] data = postcodeAsText.split(",")
+    
+    if (data.length != 2) {
+      throw new ParseException("Postcode has errors: Must be two items comma separated")
+    }
 
     Postcode postcode = null
     try

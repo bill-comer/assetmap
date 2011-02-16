@@ -12,7 +12,7 @@ class PostcodePropertyEditorTests extends GrailsUnitTestCase
 
   void testSetAsText_OKdata() {
     PostcodePropertyEditor editor = new PostcodePropertyEditor()
-    String[] testData = ["BL7", "0NG"]
+    String testData = "BL7,0NG"
     
     //test method
     editor.setAsText(testData)
@@ -25,7 +25,7 @@ class PostcodePropertyEditorTests extends GrailsUnitTestCase
   
   void testSetAsText_InvalidData() {
     PostcodePropertyEditor editor = new PostcodePropertyEditor()
-    String[] testData = ["BL7"]
+    String testData = "BL7"
     
     //test method
     try {
@@ -39,7 +39,7 @@ class PostcodePropertyEditorTests extends GrailsUnitTestCase
   
   void testSetAsText_InvalidPostcode() {
     PostcodePropertyEditor editor = new PostcodePropertyEditor()
-    String[] testData = ["BL7", "dgajdgasjhd"]
+    String testData = "BL7,dgajdgasjhd"
     
     //test method
     try {
