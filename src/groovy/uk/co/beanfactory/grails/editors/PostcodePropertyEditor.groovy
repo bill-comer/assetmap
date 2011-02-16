@@ -15,16 +15,14 @@ class PostcodePropertyEditor extends PropertyEditorSupport implements PropertyEd
    * Converts text postcode to a Postcode object.
    * @param aText text version of date
    */
-  public void setAsText(String[] postcodeAsText)
+  public void setAsText(String postcodeAsText)
   {
-    if (postcodeAsText.length != 2) {
-      throw new ParseException("Postcode must be made of two parts")
-    }
+    String[] data = postcodeAsText.split(",")
 
     Postcode postcode = null
     try
     {
-      postcode = new Postcode(outward:postcodeAsText[0], inward:postcodeAsText[1])
+      postcode = new Postcode(outward:data[0], inward:data[1])
       if (!postcode.validate()) {
         throw new ParseException("Postcode has errors:" + postcode.errors.allErrors)
       }

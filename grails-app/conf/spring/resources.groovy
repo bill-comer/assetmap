@@ -1,5 +1,6 @@
 import org.codehaus.groovy.grails.validation.ConstrainedProperty
 
+import uk.co.beanfactory.grails.editors.CustomPropertyEditorRegistrar
 import uk.co.beanfactory.grails.validation.PostcodeInwardConstraint
 import uk.co.beanfactory.grails.validation.PostcodeOutwardConstraint
 
@@ -7,4 +8,8 @@ import uk.co.beanfactory.grails.validation.PostcodeOutwardConstraint
 beans = {
   ConstrainedProperty.registerNewConstraint(PostcodeOutwardConstraint.NAME, PostcodeOutwardConstraint)
   ConstrainedProperty.registerNewConstraint(PostcodeInwardConstraint.NAME, PostcodeInwardConstraint)
+  customPropertyEditorRegistrar(CustomPropertyEditorRegistrar)
 }
+
+
+
