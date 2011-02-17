@@ -22,4 +22,17 @@ class Asset
   static mapping = {
     postcode type: PostcodeType, {column name: "postcode" }
     }
+  
+  String toString(){
+    return "name[" + name + "],desc[" + description + "], postcode[" + getPostcodeForToString() +"]"
+  }
+  
+  private String getPostcodeForToString() {
+    if (postcode != null) {
+      return postcode
+    } else {
+      return ""
+    }
+    
+  }
 }

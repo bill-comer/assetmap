@@ -41,10 +41,9 @@
                                 <td valign="top" class="name">
                                     <label for="postcode"><g:message code="asset.postcode.label" default="Postcode" /></label>
                                 </td>
-                                <td valign="top" class="value ${hasErrors(bean: assetInstance, field: 'postcode', 'errors')}">
-                                    <g:textField name="postcode" maxlength="4" value="${assetInstance?.postcode.outward}" size="4" />
-                                    <g:textField name="postcode" maxlength="3" value="${assetInstance?.postcode.inward}" size="3" />
-                                    
+                                <td valign="top" class="value ${hasErrors(bean: postcodeInstance, field: 'postcode.outward', 'errors')}">
+                                    <g:textField name="outward" maxlength="4" value="${postcodeInstance.outward}" size="4" />
+                                    <g:textField name="inward" maxlength="3" value="${postcodeInstance.inward}" size="3" />
                                 </td>
                             </tr>
                         

@@ -70,9 +70,11 @@ log4j = {
     // Example of changing the log pattern for the default console
     // appender:
     //
-    //appenders {
-    //    console name:'stdout', layout:pattern(conversionPattern: '%c{2} %m%n')
-    //}
+    appenders {
+    file name:'file', file:'C:/projects/grails_work/assetMap2/app.log', append: false
+    console name:'stdout'
+}
+
 
     error  'org.codehaus.groovy.grails.web.servlet',  //  controllers
            'org.codehaus.groovy.grails.web.pages', //  GSP
@@ -87,4 +89,14 @@ log4j = {
            'net.sf.ehcache.hibernate'
 
     warn   'org.mortbay.log'
+    
+    root {
+      // change the root logger to my tomcatLog file
+      error 'file', stdout
+      info 'file', stdout
+      warn 'file', stdout
+      debug 'file', stdout
+      additivity = true
+      }
+      
 }
